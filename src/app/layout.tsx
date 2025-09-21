@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import LayoutWrapper from "../components/LayoutWrapper";
 
 // cspell:ignore Satoshi satoshi
 const satoshi = localFont({
@@ -71,7 +72,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${satoshi.variable} antialiased`}>{children}</body>
+      <body className={`${satoshi.variable} antialiased`}>
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </body>
     </html>
   );
 }
