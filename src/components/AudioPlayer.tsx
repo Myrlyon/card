@@ -20,7 +20,7 @@ export default function AudioPlayer({
   const [showFullScreenOverlay, setShowFullScreenOverlay] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [, setIsContentVisible] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -97,7 +97,6 @@ export default function AudioPlayer({
     }
   };
 
-  // Prevent SSR/hydration mismatch by not rendering until mounted
   if (!isMounted) {
     return null;
   }
@@ -111,7 +110,6 @@ export default function AudioPlayer({
         Your browser does not support the audio element.
       </audio>
 
-      {/* Full-screen click overlay */}
       {showFullScreenOverlay && (
         <div
           onClick={handleFullScreenClick}
@@ -123,7 +121,6 @@ export default function AudioPlayer({
         </div>
       )}
 
-      {/* Mini control button when playing */}
       {isLoaded && isPlaying && !showFullScreenOverlay && (
         <button
           onClick={handlePlayClick}
