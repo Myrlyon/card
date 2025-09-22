@@ -20,9 +20,8 @@ export default function AudioPlayer({
   const [showFullScreenOverlay, setShowFullScreenOverlay] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
+  const [, setIsContentVisible] = useState(false);
 
-  // Fix hydration mismatch by ensuring component only renders on client
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -46,7 +45,7 @@ export default function AudioPlayer({
         onMusicStarted?.();
       } catch (error) {
         console.log("Initial autoplay blocked:", error);
-        // Show full-screen overlay for user interaction
+
         setShowFullScreenOverlay(true);
       }
     };

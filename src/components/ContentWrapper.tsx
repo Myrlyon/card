@@ -17,14 +17,14 @@ export default function ContentWrapper({
   useEffect(() => {
     if (isVisible) {
       setShouldRender(true);
-      // Start fade-in after a short delay
+
       const timer = setTimeout(() => {
         setOpacity(1);
       }, 100);
       return () => clearTimeout(timer);
     } else {
       setOpacity(0);
-      // Remove from DOM after fade-out completes
+
       const timer = setTimeout(() => {
         setShouldRender(false);
       }, 500);
