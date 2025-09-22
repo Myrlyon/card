@@ -9,7 +9,7 @@ interface LayoutWrapperProps {
 }
 
 export default function LayoutWrapper({ children }: LayoutWrapperProps) {
-  const [isContentVisible, setIsContentVisible] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(true);
 
   const handleMusicStarted = () => {
     setIsContentVisible(true);
