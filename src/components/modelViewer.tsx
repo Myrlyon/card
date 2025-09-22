@@ -18,7 +18,6 @@ export default function ModelViewer() {
           modelViewer.setAttribute("shadow-intensity", "1");
           modelViewer.setAttribute("autoplay", "");
           modelViewer.setAttribute("loading", "eager");
-          modelViewer.style.setProperty("--progress-bar-color", "transparent");
           const isMobile = window.innerWidth <= 768;
           const size = isMobile ? "370px" : "500px";
           modelViewer.style.width = size;
