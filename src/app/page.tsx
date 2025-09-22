@@ -1,10 +1,12 @@
+import ModelViewer from "@/components/modelViewer";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#0231fe]">
       <div className=" flex flex-col items-center gap-4">
-        <Image src="/images/crown.png" alt="Crown" width={140} height={140} />
+        {/* <Image src="/images/crown.png" alt="Crown" width={140} height={140} /> */}
+        <ModelViewer />
         <div className="flex items-center flex-col gap-5">
           <div className="text-5xl font-semibold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] ">
             margician
