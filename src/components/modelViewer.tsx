@@ -15,14 +15,14 @@ export default function ModelViewer() {
           modelViewer.setAttribute("src", "/models/beating_heart.glb");
           modelViewer.setAttribute("alt", "3D Model");
           modelViewer.setAttribute("camera-controls", "");
+          modelViewer.setAttribute("disable-pan", "");
           modelViewer.setAttribute("auto-rotate", " ");
           modelViewer.setAttribute("shadow-intensity", "0");
           modelViewer.setAttribute("autoplay", "");
           modelViewer.setAttribute("loading", "eager");
-          const isMobile = window.innerWidth <= 768;
-          const size = isMobile ? "370px" : "500px";
-          modelViewer.style.width = size;
-          modelViewer.style.height = size;
+          modelViewer.setAttribute("interaction-prompt", "none");
+          modelViewer.style.width = "100vw";
+          modelViewer.style.height = "100vh";
 
           modelViewerRef.current.innerHTML = "";
           modelViewerRef.current.appendChild(modelViewer);
