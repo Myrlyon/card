@@ -17,8 +17,12 @@ export default function ModelViewer() {
           modelViewer.setAttribute("auto-rotate", " ");
           modelViewer.setAttribute("shadow-intensity", "1");
           modelViewer.setAttribute("autoplay", "");
-          modelViewer.style.width = "500px";
-          modelViewer.style.height = "500px";
+          modelViewer.setAttribute("loading", "eager");
+          modelViewer.style.setProperty("--progress-bar-color", "transparent");
+          const isMobile = window.innerWidth <= 768;
+          const size = isMobile ? "370px" : "500px";
+          modelViewer.style.width = size;
+          modelViewer.style.height = size;
 
           modelViewerRef.current.innerHTML = "";
           modelViewerRef.current.appendChild(modelViewer);
@@ -38,5 +42,5 @@ export default function ModelViewer() {
     loadModelViewer();
   }, []);
 
-  return <div ref={modelViewerRef} style={{ width: "100%", height: "100%" }} />;
+  return <div ref={modelViewerRef} className="w-[100%] h-[100%]" />;
 }
