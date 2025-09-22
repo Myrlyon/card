@@ -14,6 +14,7 @@ export default function ModelViewer() {
           const modelViewer = document.createElement("model-viewer");
           modelViewer.setAttribute("src", "/models/beating_heart.glb");
           modelViewer.setAttribute("alt", "3D Model");
+          modelViewer.setAttribute("camera-controls", "");
           modelViewer.setAttribute("auto-rotate", " ");
           modelViewer.setAttribute("shadow-intensity", "1");
           modelViewer.setAttribute("autoplay", "");
