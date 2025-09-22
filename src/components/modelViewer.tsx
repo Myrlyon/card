@@ -16,7 +16,7 @@ export default function ModelViewer() {
           modelViewer.setAttribute("alt", "3D Model");
           modelViewer.setAttribute("camera-controls", "");
           modelViewer.setAttribute("auto-rotate", " ");
-          modelViewer.setAttribute("shadow-intensity", "1");
+          modelViewer.setAttribute("shadow-intensity", "0");
           modelViewer.setAttribute("autoplay", "");
           modelViewer.setAttribute("loading", "eager");
           const isMobile = window.innerWidth <= 768;
