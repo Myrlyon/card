@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Marquee from "react-fast-marquee";
 
 interface AudioPlayerProps {
   src: string;
@@ -21,6 +22,7 @@ export default function AudioPlayer({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -45,7 +47,6 @@ export default function AudioPlayer({
         onMusicStarted?.();
       } catch (error) {
         console.log("Initial autoplay blocked:", error);
-
         setShowFullScreenOverlay(true);
       }
     };
@@ -76,13 +77,21 @@ export default function AudioPlayer({
     if (!audio) return;
 
     try {
+      setIsFlipping(true);
       await audio.play();
       setIsPlaying(true);
-      setShowFullScreenOverlay(false);
-      setIsContentVisible(true);
+
+      // Wait for flip animation to complete before hiding overlay
+      setTimeout(() => {
+        setShowFullScreenOverlay(false);
+        setIsContentVisible(true);
+        setIsFlipping(false);
+      }, 600);
+
       onMusicStarted?.();
     } catch (err) {
       console.log("Audio play failed:", err);
+      setIsFlipping(false);
     }
   };
 
@@ -113,10 +122,35 @@ export default function AudioPlayer({
       {showFullScreenOverlay && (
         <div
           onClick={handleFullScreenClick}
-          className="fixed inset-0 z-50 bg-[#0231fe] backdrop-blur-sm flex items-center justify-center cursor-pointer transition-opacity duration-500"
+          className={`fixed inset-0 z-50 bg-[#0231fe] backdrop-blur-sm flex cursor-pointer transition-transform duration-600 transform-gpu ${
+            isFlipping ? "animate-flip-out" : ""
+          }`}
+          style={{
+            perspective: "1000px",
+            transformStyle: "preserve-3d",
+          }}
         >
-          <div className="text-center text-white space-y-6 p-8">
-            <h2 className="text-3xl font-semibold">Press to show</h2>
+          <div className="text-white w-full py-4 flex flex-col justify-between">
+            <Marquee
+              speed={500}
+              gradient={false}
+              direction="right"
+              autoFill
+              className="uppercase font-bold italic text-4xl lg:text-8xl"
+            >
+              Business Card&nbsp;
+            </Marquee>
+            <div className="uppercase font-semibold text-center text-5xl lg:text-7xl animate-spin">
+              CLICK!
+            </div>
+            <Marquee
+              speed={500}
+              gradient={false}
+              autoFill
+              className="uppercase font-bold italic text-4xl lg:text-8xl"
+            >
+              Business Card&nbsp;
+            </Marquee>
           </div>
         </div>
       )}
@@ -128,10 +162,24 @@ export default function AudioPlayer({
           title="Pause music"
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+            <path d="M6 4h-4v16H6V4zm8 0h4v16h-4V4z" />
           </svg>
         </button>
       )}
+
+      <style jsx>{`
+        @keyframes flip-out {
+          0% {
+            transform: rotateY(0deg);
+          }
+          100% {
+            transform: rotateY(-90deg);
+          }
+        }
+        .animate-flip-out {
+          animation: flip-out 0.6s ease-in-out forwards;
+        }
+      `}</style>
     </>
   );
 }
